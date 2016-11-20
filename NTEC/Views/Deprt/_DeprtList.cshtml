@@ -1,0 +1,127 @@
+﻿@using System.Globalization
+@using NTEC.Models
+@using PagedList
+@using PagedList.Mvc
+
+<div id="DepartmentDataGrid">
+    <div class="row">
+        <div class="col-md-12">
+
+            <!-- BEGIN SAMPLE TABLE PORTLET-->
+            <div class="portlet box green">
+
+                <div class="portlet-title">
+                    <div class="caption">
+                        @(global::Resources.Resource.Departments)
+                    </div>
+
+                </div>
+                <div class="portlet-body flip-scroll">
+                    <div class="table-toolbar">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="btn-group">
+                                    @Html.ActionLink((global::Resources.Resource.CreateNewDepartments), "CreateDepartment", "Deprt", new { @class = "btn green", data_modal = "" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="table table-bordered table-striped table-condensed flip-content">
+                        <thead class="flip-content">
+                            <tr>
+                                <th class="text-center">
+                                    @(global::Resources.Resource.NameEn)
+                                </th>
+                                <th class="text-center">
+                                    @(global::Resources.Resource.ShortNameEn)
+                                </th>
+                                <th class="text-center">
+                                    @(global::Resources.Resource.NameAr)
+                                </th>
+                                <th class="text-center">
+                                    @(global::Resources.Resource.ShortNAmeAr)
+                                </th>
+                                <th class="text-center">
+                                    @(global::Resources.Resource.CreatedAt)
+                                </th>
+                                <th class="text-center">
+                                    @(global::Resources.Resource.Action)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var department in ViewBag.OnePageOfGeneratedReference)
+                            {
+                                <tr>
+                                    <td >
+                                        @*<a href="@Url.Action("UpdateDepartment", "Deprt", new {id = department.DepartmentId})">
+                                                @department.NameEn
+                                            </a>*@
+                                        @Html.ActionLink((string)@department.NameEn, "UpdateDepartment", "Deprt", new { id = department.DepartmentId }, new { data_modal = "" })
+                                    </td>
+                                    <td >@department.ShortcutEn</td>
+                                    <td style="text-align: right">@department.NameAr</td>
+                                    <td style="text-align: right">@department.ShortcutAr</td>
+                                    <td class="text-center">@department.CreatedAt.ToString("dd/MM/yyyy HH:mm", new CultureInfo("en-US"))</td>
+                                    <td class="text-center" style="width: 6%">
+                                        @Html.NoEncodeActionLink("<span class='fa fa-times'></span>", "Delete", "Delete", "Deprt", routeValues: new { id = department.DepartmentId }, htmlAttributes: new { data_modal = "", @class = "btn btn-sm btn-danger" })
+                                    </td>
+
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+
+                        @Html.PagedListPager((IPagedList)ViewBag.OnePageOfGeneratedReference, page => Url.Action("List", new { page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "DepartmentDataGrid" }))
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+   
+    $(function () {
+        $.ajaxSetup({ cache: false });
+
+        $("a[data-modal]").on("click", function (e) {
+            // hide dropdown if any (this is used wehen invoking modal from link in bootstrap dropdown )
+            //$(e.target).closest('.btn-group').children('.dropdown-toggle').dropdown('toggle');
+
+            $('#myModalContent').load(this.href, function () {
+                $('#myModal').modal({
+                  backdrop: 'static',
+                    keyboard: true
+                }, 'show');
+                bindForm(this);
+            });
+            return false;
+        });
+    });
+
+    function bindForm(dialog) {
+        $('form', dialog).submit(function () {
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: $(this).serialize(),
+                success: function (result) {
+                    if (result.success) {
+                      
+                        $('#myModal').modal('hide');
+                        $('#DepartmentDataGrid').load(result.url); //  Load data from the server and place the returned HTML into the matched element
+
+                    } else {
+                        $('#myModalContent').html(result);
+                        bindForm(dialog);
+                    }
+                }
+            });
+            return false;
+        });
+    }
+</script>

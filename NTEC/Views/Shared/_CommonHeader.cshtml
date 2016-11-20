@@ -1,0 +1,174 @@
+﻿
+@using NTEC.Classes.Security
+@using Resources
+@{
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+@section Header
+{
+
+    @RenderSection("Header", false)
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto:700' rel='stylesheet' type='text/css'>
+   
+    <script src="~/Scripts/app/home/app.ui.commonInfo.js"></script>
+
+    <script type="text/javascript">
+        window.ApplicationBasePath = '@Url.Content("~")';
+
+        $(function () {
+            //alert("calling readymain");
+            SampleNS.UI.CommonInfo.readyMain();
+
+        });
+    </script>
+
+
+</head>
+
+
+<body>
+    <header>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="logo"> <a id="ibtnLogo" href="#"> <img src="~/Content/images/logo.png" class="img-responsive" alt="" /> </a> </div>
+                </div>
+                <div class="col-sm-7">
+
+
+                    <ul class="app-links">
+
+                        <li class="dropdown">
+                            <a id="btnUserDetail" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                <div id="divWelcome">
+                                    <span class="caret caret-margin"></span>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu admin_links" role="menu">
+                                <li style="width: 158px;"><a id="btnLogout" href="#">@(global::Resources.Resource.Signout)</a></li>
+
+                            </ul>
+                        </li>
+                        <li class="dropdown language">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+
+                                <div id="divLang">
+                                    العربية
+                                    <span class="caret caret-margin"></span>
+                                </div>
+
+                            </a>
+                            <ul class="dropdown-menu admin_links" role="menu">
+                                <li> <a href="#" id="btnArabic">العربية</a> </li>
+                                <li> <a href="#" id="btnEnglish">English</a> </li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container-fluid heighteight">
+        <div class="row fullheight">
+            <div class="col-md-2 col-sm-3 padddings0 fullheight">
+
+                <div id="divMenuList" class="left-side">
+                    <ul class="nav nav-tabs nav-stacked" id="myTabs" role="tablist">
+                        <li class="active"><a id="lbtnInboxCorrespondence" href="#" data-toggle="tab"><span class="pull-left sidein-pad icon icon-cibox"></span>@(global::Resources.Resource.Inbox)  <span id="cInbox" class="label label-warning"></span></a></li>
+                        <li><a id="lbtnSentCorrespondence" href="#" data-toggle="tab"><span class="pull-left sidein-pad icon icon-csent"></span>@(global::Resources.Resource.Sent)  <span id="cSent" class="label label-warning"></span></a></li>
+                        <li><a id="lbtnInternalCorrespondence" href="#" data-toggle="tab"><i style="font-size: 18px;" class="pull-left sidein-pad1 fa fa-inbox"></i><span style="margin-left: 8px;">  @(global::Resources.Resource.Internal) </span>  <span id="cInternal" class="label label-warning"></span></a></li>
+                        <li><a id="lbtnArchivedCorrespondence" href="#" data-toggle="tab"><i style="font-size: 18px;" class="pull-left sidein-pad1 fa  fa-archive"></i><span style="margin-left: 8px;">  @(global::Resources.Resource.Archived) </span>  <span id="cArchived" class="label label-warning"></span></a></li>
+                        @*<li><a id="lbtnInternalMemoCorrespondence" href="#" data-toggle="tab"><span class=" sidein-pad icon icon-cbell pull-left"></span>@(global::Resources.Resource.intMemos)  <span id="cMemos" class="label label-warning"></span></a></li>
+                        <li><a id="lbtnCircularCorrespondence" href="#" data-toggle="tab"><span class="pull-left sidein-pad icon icon-ccir"></span>@(global::Resources.Resource.Circulars)  <span id="cCircular" class="label label-warning"></span></a></li>
+                        <li><a id="lbtnAnnouncementCorrespondence" href="#" data-toggle="tab"><span class="pull-left sidein-pad icon icon-cmemos"></span>@(global::Resources.Resource.Annoucments)  <span id="cAnouncement" class="label label-warning"></span></a></li>*@
+
+                        <div class="left-side-border"></div>
+                        <li><a id="lbtnDraftMemoCorrespondence" href="#" data-toggle="tab"><span class="pull-left sidein-pad icon icon-celog"></span>@(global::Resources.Resource.Draft)  <span id="cDraft" class="label label-warning"></span></a></li>
+                       @if (SessionManager.CurrentUser.IsSysAdmin)
+                       {
+                        <li><a id="lbtnDeleteCorrespondence" href="#" data-toggle="tab"><span class="pull-left sidein-pad icon icon-ckross"></span>@(global::Resources.Resource.Deleted)  <span id="cDeleted" class="label label-warning"></span></a></li>
+                        <li class="admin_slide menuSlide-btn"><a class="admin_bg"><i class="pull-left sidein-pad pulse-rightPad fa fa-plus"></i>@(global::Resources.Resource.Admin)</a></li>
+                        <div class="menu-slide">
+                            <li><a id="btnOpenCategory" href="#" data-toggle="tab"><span class="pull-left sidein-pad icon icon-cat"></span>@(global::Resources.Resource.Categories)  </a></li>
+                            <li><a id="btnOpenExtParties" href="#" data-toggle="tab"><span class="pull-left sidein-pad icon icon-cface"></span>@(global::Resources.Resource.extParties) </a></li>
+                            <li><a id="btnOpenTemplates" href="#" data-toggle="tab"><span class="pull-left sidein-pad1 fa fa-cubes"></span>@(global::Resources.Resource.Templates)  </a></li>
+                            <li><a id="btnOpenUsers" href="#" data-toggle="tab"><span class="pull-left sidein-pad1 fa fa-user"></span>@(global::Resources.Resource.UserManagement)  </a></li>
+                            
+                        </div>
+
+                        @*<li><a id="btnOpenCategory" href="#" data-toggle="tab"><span class="pull-left sidein-pad icon icon-cat"></span>@(global::Resources.Resource.Categories)  </a></li>
+                        <li><a id="btnOpenExtParties" href="#" data-toggle="tab"><span class="pull-left sidein-pad icon icon-cface"></span>@(global::Resources.Resource.extParties) </a></li>
+                        <li><a id="btnOpenTemplates" href="#" data-toggle="tab"><i style="font-size: 17px;" class="pull-left sidein-pad1 fa fa-cubes"></i>@(global::Resources.Resource.Templates)  </a></li>*@
+                           
+                           
+                        @*<li> <a data-toggle="modal" data-target="#modal-advance" class=" advance-bottom" data-direction='right'><span class="glyphicon glyphicon-search search-icon"></span>Advance Search</a> </li>*@
+                       }
+                       
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="col-md-10 col-sm-9 fullheight padding-right">
+                @RenderBody()
+            </div>
+        </div>
+        <footer class="main-footer">
+            @*All rights reserved to iLead © 2015*@
+            @(global::Resources.Resource.FooterHeading)
+
+
+        </footer>
+    </div>
+ <script>
+        $(document).ready(function(){
+            $(".menuSlide-btn").click(function () {
+                var plusIcon = '';
+                var minusIcon = '';
+
+                if (window.appLanguageId == 1)
+                {
+                plusIcon = '<a class="admin_bg"><i class="pull-left sidein-pad pulse-rightPad fa fa-plus"></i>المشرف</a>';
+                minusIcon = '<a class="admin_bg"><i class="pull-left sidein-pad pulse-rightPad fa fa-minus"></i>المشرف</a>';
+                }
+                else
+                {
+                    plusIcon = '<a class="admin_bg"><i class="pull-left sidein-pad pulse-rightPad fa fa-plus"></i>Admin</a>';
+                    minusIcon = '<a class="admin_bg"><i class="pull-left sidein-pad pulse-rightPad fa fa-minus"></i>Admin</a>';
+                }
+                var test = "";
+                var loadingIcon = '';
+                var innerIcon = $(this).html();
+                if (innerIcon == plusIcon) {
+                    test = minusIcon;
+                } else if (innerIcon == minusIcon) {
+                    test = plusIcon;
+                }
+                $(this).html(test);
+                
+                $(".menu-slide").slideToggle("slow");
+        });
+        });
+ </script>
+</body>
+
+</html>
+
+
+
+
+
+
+

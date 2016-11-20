@@ -1,0 +1,97 @@
+﻿@using System.Globalization
+@using PagedList
+@using PagedList.Mvc
+
+<div id="OutgoingDataGrid">
+    <div class="row">
+        <div class="col-md-12">
+
+            <!-- BEGIN SAMPLE TABLE PORTLET-->
+            <div class="portlet box green">
+
+                <div class="portlet-title">
+                    <div class="caption">
+                        @(global::Resources.Resource.OutgoingGenereatedReference)
+                    </div>
+
+                </div>
+                <div class="portlet-body flip-scroll">
+                    <div class="table-toolbar">
+                        <div class="row">
+                            <div class="col-md-offset-6">
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <table class="table table-bordered table-striped table-condensed flip-content">
+                        <thead class="flip-content">
+                            <tr>
+                                <th class="text-center">
+                                    @(global::Resources.Resource.EnflishCode)
+                                </th>
+                                <th class="text-center">
+                                    @(global::Resources.Resource.ArabicCode)
+                                </th>
+                                <th class="text-center">
+                                    @(global::Resources.Resource.DepartmentName)
+                                </th>
+                                <th class="text-center">
+                                    @(global::Resources.Resource.CompanyName)
+                                </th>
+                                <th class="text-center">
+                                    @(global::Resources.Resource.CreatedAt)
+                                </th>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <th class="text-center">
+                                        @(global::Resources.Resource.Action)
+                                    </th>
+                                }
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var generatedReference in ViewBag.OnePageOfGeneratedReferenceOutgoing)
+                            {
+                                <tr>
+                                    @if (SessionManager.LanguageId == "1")
+                                    {
+                                        <td style="text-align: left">@generatedReference.GeneratedCodeEn</td>
+                                        <td style="text-align: right">@generatedReference.GeneratedCodeAr</td>
+                                        <td>@generatedReference.Department.NameAr</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@generatedReference.GeneratedCodeEn</td>
+                                        <td style="text-align: right">@generatedReference.GeneratedCodeAr</td>
+                                        <td>@generatedReference.Department.NameEn</td>
+                                    }
+                                
+                                    <td>@generatedReference.CompanyName</td>
+                                    <td class="text-center">@generatedReference.CreatedAt.ToString("dd/MM/yyyy HH:mm", new CultureInfo("en-US"))</td>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <td class="text-center">
+                                            @if (generatedReference.IsAssigned == true)
+                                            {
+                                                <a href="javascript:confirmUpdate(@generatedReference.GeneratedReferenceId)" class="btn btn-xs btn-warning">
+                                                    @(global::Resources.Resource.unassign)
+                                                </a>
+                                            }
+                                        </td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    @Html.PagedListPager((IPagedList)ViewBag.OnePageOfGeneratedReferenceOutgoing, page => Url.Action("OutgoingIndex", new { page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "OutgoingDataGrid" }))
+
+                </div>
+            </div>
+            <!-- END SAMPLE TABLE PORTLET-->
+
+        </div>
+    </div>
+</div>

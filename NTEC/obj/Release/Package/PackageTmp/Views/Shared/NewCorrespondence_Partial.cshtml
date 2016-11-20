@@ -1,0 +1,675 @@
+﻿@* ==================================== New Correspondence POP ======================== *@
+<style type="text/css">
+    .qq-upload-list {
+        display: none;
+    }
+</style>
+<script type="text/javascript">
+    function inputNumOnly(e, obj) {
+        // only allows inputting of valid number character
+        var keynum;
+
+        // catch all special keyws and allow them
+        v = e.keyCode
+
+        if (v == 8 || v == 9 || v == 13 || v == 46)
+            return true;
+
+
+
+        if (window.event) // IE
+        {
+            keynum = String.fromCharCode(e.keyCode);
+        }
+        else if (e.which) // Netscape/Firefox/Opera
+        {
+            keynum = String.fromCharCode(e.which);
+        }
+
+
+        if (keynum == '0' || keynum == '1' || keynum == '2' || keynum == '3' || keynum == '4' || keynum == '5' || keynum == '6' || keynum == '7' || keynum == '8' || keynum == '9' || keynum == '.')
+            return true;
+        return false;
+    }
+
+</script>
+@*<div class="modal" id="divAdvance_Search" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none; z-index: 100">*@
+    @*<div class="modal" id="correspondence-detail" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: block;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button id="btnCCross" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4><span id="corrTitle">@Resources.Resource.AddNewCorr</span></h4>
+                </div>
+                
+                <!--tabpanel/.-->
+
+            </div>
+            <!--right-side-->
+            @*<div class="clearfix"></div>
+            <footer class="main-footer1">
+                @(global::Resources.Resource.FooterHeading)
+            </footer>
+        </div>
+       
+        <div class="clearfix"></div>
+
+    </div>*@
+
+<div class="col-sm-12 addCorr" id="correspondence-detail">
+    <div class="col-sm-5 col-lg-4">
+        <div class="form-horizontal custom-form" role="form">
+            <div class="form-group" id="divTopButtons">
+                <ul class="btns-setting">
+                    <li><a  id="btnReplyCorr" href="#" title="@Resources.Resource.Reply" class=" btns-setting"><span class="fa fa-reply fa-lg"></span>@Resources.Resource.Reply</a></li>
+                    <li><a id="btnReplyAllCorr" href="#" title="@Resources.Resource.ReplyAll" class=" btns-setting"><span class="fa fa-reply-all fa-lg"></span>@Resources.Resource.ReplyAll</a></li>
+                    <li><a id="btnForwardCorr" href="#" title="@Resources.Resource.Forward" class=" btns-setting"><span class="fa fa-share fa-lg"></span>@Resources.Resource.Forward</a></li>
+                    <li><a id="btnForwardInt" href="#" title="@Resources.Resource.ForwardToInternal" class=" btns-setting"><span class="fa fa-share fa-lg"></span>@Resources.Resource.ForwardToInternal</a></li>
+                    <li><a id="btnForwardExt" href="#" title="@Resources.Resource.ForwardToExternal" class=" btns-setting"><span class="fa fa-share fa-lg"></span>@Resources.Resource.ForwardToExternal</a></li>
+                    <li><a id="btnDeleteCorr1" href="#" title="@Resources.Resource.Delete" class=" btns-setting"><span class="fa fa-trash-o fa-lg"></span></a></li>
+
+                    <div class="clearfix"></div>
+                </ul>
+
+            </div>
+            @*<div class="form-group">
+                     <label for="inputEmail3" class="col-sm-4 control-label">@Resources.Resource.from</label>
+                    <div class="col-sm-7 padding-right">
+                         <input readonly="readonly" title="" type="text" class="form-control from-to txtCursor" id="txtPtySelectionFrom" placeholder="">
+                     </div>
+                     <div class="col-sm-1 paddings0"> <a id="btnPartiesFrom" href="#" class="btn toggle-btn "><span class="glyphicon glyphicon-align-justify"></span></a> </div>
+
+                </div>*@
+            @*<div class="form-group">
+                    <label for="inputPassword3" class="col-sm-4 control-label">@Resources.Resource.To</label>
+                    <div class="col-sm-7 padding-right">
+                        <input readonly="readonly" title="" type="text" class="form-control from-to txtCursor" id="txtPtySelectionTo" placeholder="">
+                    </div>
+                    <div class="col-sm-1 paddings0"> <a href="#" id="btnPartiesTo" class="btn toggle-btn "><span class="glyphicon glyphicon-align-justify"></span></a> </div>
+                </div>*@
+            @*<div class="form-group">
+                    <label for="inputPassword3" class="col-sm-4 control-label">@Resources.Resource.copyTo</label>
+                    <div class="col-sm-7 padding-right">
+                        <input readonly="readonly" title="" type="text" class="form-control from-to txtCursor" id="txtPtySelectionCpyTo" placeholder="">
+                    </div>
+                    <div class="col-sm-1 paddings0"> <a href="#" id="btnPartiesCpTo" class="btn toggle-btn "><span class="glyphicon glyphicon-align-justify"></span></a> </div>
+                </div>*@
+            @*this is text*@
+            <div class="form-group">
+                <label for="InputName" class="col-sm-4 label-redBtn">@Resources.Resource.from</label>
+                <div class="col-sm-8">
+                    <div class="input-group">
+                        <input readonly="readonly" type="text" title="" class="form-control" id="txtPtySelectionFrom" placeholder="" required="">
+                        <span class="input-group-addon btn-red"><a id="btnPartiesFrom" href="#" class=""><i class="glyphicon glyphicon-align-justify form-control-feedback"></i></a></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="InputName" class="col-sm-4 label-redBtn">@Resources.Resource.To</label>
+                <div class="col-sm-8">
+                    <div class="input-group">
+                        <input readonly="readonly" type="text" title="" class="form-control" id="txtPtySelectionTo" placeholder="" required="">
+                        <span class="input-group-addon btn-red"><a id="btnPartiesTo" href="#" class=""><i class="glyphicon glyphicon-align-justify form-control-feedback"></i></a></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="InputName" class="col-sm-4 label-redBtn">@Resources.Resource.copyTo</label>
+                <div class="col-sm-8">
+                    <div class="input-group">
+                        <input readonly="readonly" type="text" title="" class="form-control" id="txtPtySelectionCpyTo" placeholder="" required="">
+                        <span class="input-group-addon btn-red"><a id="btnPartiesCpTo" href="#" class=""><i class="glyphicon glyphicon-align-justify form-control-feedback"></i></a></span>
+                    </div>
+                </div>
+            </div>
+            @*this is text*@
+
+
+
+
+            <div class="form-group">
+                <label for="inputPassword3" class="col-sm-4 control-label">@Resources.Resource.extRef</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="txtNCorrExtRef" placeholder="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword3" class="col-sm-4 control-label">@Resources.Resource.Subject</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="txtNCorrSubject" placeholder="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-4 control-label">@Resources.Resource.Category</label>
+                <div class="col-sm-8">
+                    <select id="ddlCategoryLst" class=" form-control selectpicker"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-4 control-label">@Resources.Resource.confidentiality</label>
+                <div class="col-sm-8">
+                    <select id="ddlConfidentiality" class=" form-control selectpicker">
+                        <option value="1">@Resources.Resource.TopSecret</option>
+                        <option value="2">@Resources.Resource.Secret</option>
+                        <option value="3">@Resources.Resource.Confidential</option>
+                        <option value="4">@Resources.Resource.Restricted</option>
+                        <option selected="selected" value="5">@Resources.Resource.Unclassified</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-4 control-label">@Resources.Resource.priority</label>
+                <div class="col-sm-8">
+                    <select id="ddlPriority" class=" form-control selectpicker">
+                        <option value="1">@Resources.Resource.TopUrgent</option>
+                        <option value="2">@Resources.Resource.Urgent</option>
+                        <option value="3">@Resources.Resource.High</option>
+                        <option selected="selected" value="4">@Resources.Resource.Normal</option>
+                        <option value="5">@Resources.Resource.Low</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword3" class="col-sm-4 control-label">@Resources.Resource.replyWithIn</label>
+                <div class="col-sm-6 mintext">
+                    <input type="number" min="0" class="form-control from-to" onkeypress="return inputNumOnly(event, this);" id="txtReplyWithIn" value="1" placeholder="">
+                </div>
+                <div class="col-sm-2 ">
+                    <label for="inputPassword3" class="col-sm-2 control-label">@Resources.Resource.Days</label>
+
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-4 control-label">@Resources.Resource.dateOfReply</label>
+                <div class="col-sm-8">
+                    <input type="text" readonly class="form-control txtCursor" id="txtDateOfReply" placeholder="">
+                </div>
+            </div>
+
+            <div class="inboundLinks-xs">
+                <div class="col-sm-12 no_padding">
+                    <div class="borderheading margintop"></div>
+                    <div class="btn_links margintwnty">
+                        <ul>
+                            <li>
+                                <button style="display:none;" id="btnCloseNewCorr" type="reset" class="btn btn-default btn-cancel1 btn-search"><i class="fa fa-times"></i> @Resources.Resource.Close </button>
+                            </li>
+                            <li>
+                                <button style="display:none;" id="btnCloseWindowCorr" type="reset"  class="btn btn-default btn-cancel1 btn-search"><i class="fa fa-times"></i> @Resources.Resource.Close </button>
+                            </li>
+                            <li>
+                                <button style="display:none;" id="btnSaveDraftCorr" class="btn btn-default  btn-search"><i class="fa fa-floppy-o"></i> @Resources.Resource.saveDraft </button>
+                                <button style="display:none;" id="btnSaveInboundCorr" class="btn btn-default  btn-search"><i class="fa fa-floppy-o"></i> @Resources.Resource.Save </button>
+                            </li>
+                            <li>
+                                <button style="display:none;" id="btnSendNotifyCorr" class="btn btn-default  btn-search"><i class="fa fa-info-circle"></i> @Resources.Resource.btnSaveNotify </button>
+                            </li>
+                            <li>
+                                <button style="display: none; background:#EA2025;" id="btnSendNewCorr"  class="btn btn-default  btn-search"><i class="fa fa-envelope"></i> @Resources.Resource.send </button>
+                            </li>
+
+                            <li>
+                                <button style="display: none; background: #ff6a00;" id="btnOpenArchive"  class="btn btn-default  btn-search"><i class="fa fa-archive"></i> @Resources.Resource.Archive </button>
+                            </li>
+
+
+
+                        </ul>
+
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                </div>
+                <div class="clearfix"></div>
+                <div class="detail_cores_pop">
+
+                    @*<div class="form-group margnbtm">
+                            <label for="inputPasswordd" class="col-sm-5 control-label padding-right">@Resources.Resource.lblCreatedBy</label>
+                            <div class="col-sm-7">
+                                <label class="control-label" id="corrByName"></label>
+                            </div>
+                        </div>
+                        <div class="form-group margnbtm">
+                            <label for="inputPassword3" class="col-sm-5 control-label padding-right">@Resources.Resource.corrDate</label>
+                            <div class="col-sm-7">
+                                <label class="control-label" id="corrDate"></label>
+                            </div>
+                        </div>*@
+                    <div class="form-group margnbtm">
+                        <label for="inputPassword3" class="col-sm-5 control-label">@Resources.Resource.status</label>
+                        <div class="col-sm-5">
+                            <label class="control-label" id="corrStatus">@Resources.Resource.Draft</label>
+                        </div>
+                    </div>
+                    <div class="form-group margnbtm">
+                        <label for="inputPassword3" class="col-sm-5 control-label padding-right">@Resources.Resource.intRef</label>
+                        <div class="col-sm-5">
+                            <label class="control-label" id="corrIntRef"></label>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <hr class="margin-top">
+
+                    <div id="lblCreatedBy">
+                        <ul>
+                            <li>@Resources.Resource.lblCreatedBy</li>
+                            <li><label class="" id="corrByName"></label></li>
+                            <li>At</li>
+                            <li><label class="" id="corrDate"></label></li>
+                        </ul>
+                    </div>
+                    <label style="color: #646e73;font-size: 11px;font-weight: lighter;" id="lblFwdBy"></label>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-sm-7 col-lg-8">
+        <div role="tabpanel" class="template-btn">
+
+            <div class="content-select">
+
+                <select id="ddlUserTemplates" class="form-control form-control selectpicker"></select>
+            </div>
+            <h2 id="h2Tamplate">@Resources.Resource.Templates </h2>
+            <ul class="nav nav-tabs " role="tablist">
+                <li id="tabContentCorr" role="presentation" class="active"><a href="#Content " aria-controls="home" role="tab" data-toggle="tab">@Resources.Resource.content </a></li>
+                <li id="tabRelatedCorr" role="presentation"><a href="#Related" aria-controls="profile" role="tab" data-toggle="tab">@Resources.Resource.related</a></li>
+                <li id="tabCommentsCorr" role="presentation"><a href="#Comments" aria-controls="Comments" role="tab" data-toggle="tab"> @Resources.Resource.Hd_Comments</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="Content">
+
+                    <div class="margintop"></div>
+                    <div class="clearfix"></div>
+                    <textarea id="corrEditor" style="width:100%;height:70%; "> </textarea>
+                    <!--editor/.-->
+                    <div class="categories">
+                        <div class="row paddedRow">
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><div class="attach-txt"> @Resources.Resource.Attachments</div> <div class="clearfix"></div></div>
+                                <div class="clearfix"></div>
+                                @*<div class="panel-heading"><i class="fa fa-paperclip"></i> <div style=" float:left" ></div> @Resources.Resource.Attachments <div id="btnDeleteAttachment" style=" float:right"> <span class="fa fa-minus-square fa-lg"></span> Delete Attachment </div> </div>*@
+
+                                <div class="modal-body" id="attachmentArea">
+                                    <div title=@Resources.Resource.Upload_File class="upload_file">
+                                        <form class="form-horizontal" role="form">
+
+
+
+                                            <div class="app-main">
+
+
+                                                <div class="tab-content-outer">
+                                                    <div class="tab-content">
+
+
+                                                        <div style="height:70px; overflow-y:scroll;" class="row" id="CorrAttachments">
+
+
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-xs-12 attachment-browse">
+
+
+                                                        <script type="text/template" id="qq-template-manual-noedit">
+                                                            <div class="qq-uploader-selector qq-uploader">
+
+                                                            </div>
+                                                        </script>
+
+
+
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+
+                                                                <div class="file_uploader_center">
+                                                                    <div id="fine-uploader"></div>
+
+
+                                                                    <div id="triggerUpload" style=" display:none" class="btn btn-primary btn-upload">
+                                                                        <span class="glyphicon glyphicon-upload" title=@Resources.Resource.Upload_File></span> @Resources.Resource.Uploadnow
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+
+
+
+                                                    </div>
+                                                    <div class="clearfix"></div>
+
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!--categories/.-->
+                    </div>
+                </div>
+                <!--Content/.-->
+                <div role="tabpanel" class="tab-pane" id="Related">
+                    <div class="tab-content-outer">
+                        <div class="tab-content">
+                            <table id="divRelatedCorrGrid"></table>
+                            <div id="pagerdivRelatedCorrGrid"></div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                @*Comments*@
+
+                <div role="tabpanel" class="tab-pane" id="Comments">
+                    <div class="tab-content-outer">
+                        <div class="tab-content">
+
+                            <div class="correns-comments">
+                                <div class="row">
+                                    <div class="comments-main" id="pnlCorrComments">
+                                        @* <div class="col-sm-12 comments-section">
+                                                <div class="comments-heading">
+                                                    <div class="row">
+                                                        <div class="col-sm-8">
+                                                            <ul class="user-detail">
+                                                                <li><a href="#."><span id="lblUserComment">Usman</span></a></li>
+                                                                <li><a href="#."><span id="lblDateComment">09 jan,2015</span></a></li>
+                                                            </ul>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <ul class="edit-delete">
+                                                                <li><a href="#." id="btnEditComment" ><i class="fa fa-pencil-square-o"></i></a></li>
+                                                                <li><a href="#." id="btnDeleteComment"><i class="fa fa-times"></i></a></li>
+
+                                                            </ul>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="user-comments">
+                                                    <div class="row">
+                                                        <div class="textPadding">
+                                                            <p>
+                                                                If you’re a brand building an audience for content, advertising with Disqus connects you to geeks geeking out, about stuff that matters to you.If you’re a brand building an audience for content, advertising with Disqus connects you to geeks geeking out, about stuff that matters to you.If you’re a brand building an audience for content, advertising with Disqus connects you to geeks geeking out, about stuff that matters to you.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                            </div>
+                                            <div class="col-sm-12 comments-section">
+                                                <div class="comments-heading">
+                                                    <div class="row">
+                                                        <div class="col-sm-8">
+                                                            <ul class="user-detail">
+                                                                <li><a href="#.">Usman</a></li>
+                                                                <li><a href="#.">09 jan,2015</a></li>
+                                                            </ul>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <ul class="edit-delete">
+                                                                <li><a href="#."><i class="fa fa-pencil-square-o"></i></a></li>
+                                                                <li><a href="#."><i class="fa fa-times"></i></a></li>
+
+                                                            </ul>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="user-comments">
+                                                    <div class="row">
+                                                        <div class="textPadding">
+                                                            <p>
+                                                                If you’re a brand building an audience for content, advertising with Disqus connects you to geeks geeking out, about stuff that matters to you.If you’re a brand building an audience for content, advertising with Disqus connects you to geeks geeking out, about stuff that matters to you.If you’re a brand building an audience for content, advertising with Disqus connects you to geeks geeking out, about stuff that matters to you.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                            </div>
+                                            <div class="col-sm-12 comments-section">
+                                                <div class="comments-heading">
+                                                    <div class="row">
+                                                        <div class="col-sm-8">
+                                                            <ul class="user-detail">
+                                                                <li><a href="#.">Usman</a></li>
+                                                                <li><a href="#.">09 jan,2015</a></li>
+                                                            </ul>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <ul class="edit-delete">
+                                                                <li><a href="#."><i class="fa fa-pencil-square-o"></i></a></li>
+                                                                <li><a href="#."><i class="fa fa-times"></i></a></li>
+
+                                                            </ul>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="user-comments">
+                                                    <div class="row">
+                                                        <div class="textPadding">
+                                                            <p>
+                                                                If you’re a brand building an audience for content, advertising with Disqus connects you to geeks geeking out, about stuff that matters to you.If you’re a brand building an audience for content, advertising with Disqus connects you to geeks geeking out, about stuff that matters to you.If you’re a brand building an audience for content, advertising with Disqus connects you to geeks geeking out, about stuff that matters to you.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                            </div>
+                                            <div class="col-sm-12 comments-section">
+                                                <div class="comments-heading">
+                                                    <div class="row">
+                                                        <div class="col-sm-8">
+                                                            <ul class="user-detail">
+                                                                <li><a href="#.">Usman</a></li>
+                                                                <li><a href="#.">09 jan,2015</a></li>
+                                                            </ul>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <ul class="edit-delete">
+                                                                <li><a href="#."><i class="fa fa-pencil-square-o"></i></a></li>
+                                                                <li><a href="#."><i class="fa fa-times"></i></a></li>
+
+                                                            </ul>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="user-comments">
+                                                    <div class="row">
+                                                        <div class="textPadding">
+                                                            <p>
+                                                                If you’re a brand building an audience for content, advertising with Disqus connects you to geeks geeking out, about stuff that matters to you.If you’re a brand building an audience for content, advertising with Disqus connects you to geeks geeking out, about stuff that matters to you.If you’re a brand building an audience for content, advertising with Disqus connects you to geeks geeking out, about stuff that matters to you.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                            </div>
+                                            <div class="col-sm-12 comments-section">
+                                                <div class="comments-heading">
+                                                    <div class="row">
+                                                        <div class="col-sm-8">
+                                                            <ul class="user-detail">
+                                                                <li><a href="#.">Usman</a></li>
+                                                                <li><a href="#.">09 jan,2015</a></li>
+                                                            </ul>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <ul class="edit-delete">
+                                                                <li><a href="#."><i class="fa fa-pencil-square-o"></i></a></li>
+                                                                <li><a href="#."><i class="fa fa-times"></i></a></li>
+
+                                                            </ul>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="user-comments">
+                                                    <div class="row">
+                                                        <div class="textPadding">
+                                                            <p>
+                                                                If you’re a brand building an audience for content, advertising with Disqus connects you to geeks geeking out, about stuff that matters to you.If you’re a brand building an audience for content, advertising with Disqus connects you to geeks geeking out, about stuff that matters to you.If you’re a brand building an audience for content, advertising with Disqus connects you to geeks geeking out, about stuff that matters to you.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                            </div>*@
+                                    </div>
+                                </div>
+                                <div class="form-reply-main" id="divtxtComment">
+
+                                    <div class="row">
+                                        <div class="correspondence-reply">
+                                            <div class="col-sm-10 coltags">
+                                                <div id="CommentsTags" class="commentsTag-wrapper">
+                                                    @*<ul id="Commentul" class="comments-tag">
+                                                            <li><a href="#">@Resources.Resource.Print</a></li>
+                                                            <li><a href="#"> @Resources.Resource.Forward</a></li>
+                                                            <li><a href="#"> @Resources.Resource.Circular </a></li>
+                                                            <li><a href="#">@Resources.Resource.File</a></li>
+                                                            <li><a href="#">@Resources.Resource.SendItTo</a></li>
+                                                            <li><a href="#"> @Resources.Resource.Reply</a></li>
+                                                            <li><a href="#">@Resources.Resource.DoTheRequest</a></li>
+                                                            <li><a href="#">@Resources.Resource.Accountant</a></li>
+                                                            <li><a href="#"> @Resources.Resource.AbuAlHamd</a></li>
+                                                        </ul>*@
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <div class="form-group commSave-btn">
+                                                    <textarea class="form-control reply-comments" style=" color:black; font-weight:bold; " id="txtComments" rows="4" placeholder="@Resources.Resource.EnterComments"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2 colBtn">
+                                                <div class="form-group">
+                                                    <button type="button" id="btnSaveComments" class="btn btn-default corres-sumit"> @Resources.Resource.Submit </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            
+        </div>
+
+    </div>
+    
+</div>
+<div id="divbtn" class="col-sm-12"></div>
+
+
+    @* =============================== END New Correspondence POP ========================== *@
+
+
+
+    <script id="CorrAttachmenttemplate" type="text/x-handlebars-template">
+        {{#each DataList}}
+
+        <div class="col-xs-3 col-pad-5" style=" border:solid 0px blue;">
+            <div class="btn attach-border" style="cursor: default; ">
+                <table style=" border: solid 0px black; cursor:default; border-collapse:collapse; text-space-collapse:collapse  ">
+                    <tr style="border-collapse: collapse">
+                        <td class="file-name" style="border: solid 0px black; cursor: pointer; border-collapse:collapse">
+                            <span style=" display:none" class="jobID">{{AttachmentId}}</span>
+                            {{{FileLogo}}}
+                        </td>
+                        @*<td class="file-name">{{FilePath}}</td>*@
+                        <td class="delete-link" style=" border: solid 0px yellow; cursor: pointer; border-collapse: collapse">
+                          {{{DeleteAttach}}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+
+        {{/each}}
+    </script>
+
+
+    <script id="CorrComments" type="text/x-handlebars-template">
+        {{#each DataList}}
+
+        <div class="col-sm-12 comments-section">
+            <div class="comments-heading">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <ul class="user-detail">
+
+                            <li><a href="#."><span id="lblUserComment">{{{UserName}}}</span></a></li>
+                            <li><a href="#."><span id="lblDateComment">{{{CreationDate}}}</span></a></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="col-sm-4">
+                        <ul class="edit-delete">
+                            @*<li><a href="#." id="btnEditComment"><i class="fa fa-pencil-square-o"></i></a></li>*@
+                            <li><a href="#." id="btnDeleteComment"><i class="fa fa-times"></i></a></li>
+
+                        </ul>
+                        <span style=" display:none" id="lblCommentId">{{{CommentId}}}</span>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="user-comments">
+                <div class="row">
+                    <div class="textPadding">
+                        <p>
+                            {{{Description}}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+        {{/each}}
+    </script>

@@ -1,0 +1,115 @@
+﻿@using NTEC.Models
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_ProjectLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+
+        <!-- BEGIN SAMPLE TABLE PORTLET-->
+        <div class="portlet box green">
+
+            <div class="portlet-title">
+                <div class="caption">
+                    Departments
+                </div>
+
+            </div>
+            <div class="portlet-body flip-scroll">
+                <div class="table-toolbar">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="btn-group">
+                                <a href="@Url.Action("CreateDepartment", "Department")" class="btn green">
+                                    Add New <i class="fa fa-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                        @*<div class="col-md-6">
+                                <div class="form-group form-md-line-input has-info form-md-floating-label">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-control">
+                                            <input type="text" class="form-control input-sm" placeholder="search">
+
+                                        </div>
+                                        <span class="input-group-btn btn-right">
+                                            <button class="btn btn-warning" type="submit">Search!</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>*@
+                    </div>
+                </div>
+
+                <table class="table table-bordered table-striped table-condensed flip-content">
+                    <thead class="flip-content">
+                        <tr>
+                            <th class="text-center">
+                                <i class="fa fa-flag"></i> Name En
+                            </th>
+                            <th class="text-center">
+                                <i class="fa fa-list-ul"></i> Shortcut En
+                            </th>
+                            <th class="text-center">
+                                <i class="fa fa-briefcase"></i> Name Ar
+                            </th>
+                            <th class="text-center">
+                                <i class="fa fa-user"></i> Shortcut Ar
+                            </th>
+                            <th class="text-center">
+
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var department in ViewBag.OnePageOfGeneratedReference)
+                        {
+                            <tr>
+
+                                <td class="text-center">@department.NameEn</td>
+                                <td class="text-center">@department.ShortcutEn</td>
+                                <td class="text-center">@department.NameAr</td>
+                                <td class="text-center">@department.ShortcutAr</td>
+                                <td class="text-center">
+                                    @*<a href="javascript:;" class="btn btn-xs red">
+                                            Delete <i class="fa fa-times"></i>
+                                        </a>*@
+                                    @*<a href="javascript:;" class="btn btn-xs red">
+                                            Update <i class="fa fa-times"></i>
+                                        </a>*@
+
+                                    <div class="col-md-3">
+                                        <div class="btn-group">
+                                            <a href="@Url.Action("UpdateDepartment", "Departments", new { id = department.DepartmentId })" class="btn green">
+                                                Update <i class="fa fa-plus"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="btn-group">
+                                            <a href="@Url.Action("DeleteDepartment", "Departments", new { id = department.DepartmentId })" class="btn red">
+                                                Delete <i class="fa fa-plus"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+                @Html.PagedListPager((PagedList.IPagedList)ViewBag.OnePageOfGeneratedReference, page => Url.Action("Index", new { page }))
+            </div>
+
+        </div>
+
+        <!-- END SAMPLE TABLE PORTLET-->
+
+    </div>
+</div>
+

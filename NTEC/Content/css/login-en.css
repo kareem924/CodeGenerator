@@ -1,0 +1,339 @@
+﻿html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+    blockquote:before, blockquote:after, q:before, q:after {
+        content: '';
+        content: none;
+    }
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.about {
+    margin: 70px auto 40px;
+    padding: 8px;
+    width: 260px;
+    font: 10px/18px 'Lucida Grande', Arial, sans-serif;
+    color: #666;
+    text-align: center;
+    text-shadow: 0 1px rgba(255,255,255,.25);
+    background: #eee;
+    background: rgba(250,250,250,.8);
+    border-radius: 4px;
+    background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.1));
+    background-image: -moz-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.1));
+    background-image: -o-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.1));
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,.1));
+    -webkit-box-shadow: inset 0 1px rgba(255,255,255,.3), inset 0 0 0 1px rgba(255,255,255,.1), 0 0 6px rgba(0,0,0,.2);
+    box-shadow: inset 0 1px rgba(255,255,255,.3), inset 0 0 0 1px rgba(255,255,255,.1), 0 0 6px rgba(0,0,0,.2);
+}
+
+    .about a {
+        color: #333;
+        text-decoration: none;
+        border-radius: 2px;
+        -webkit-transition: background .1s;
+        -moz-transition: background .1s;
+        -o-transition: background .1s;
+        transition: background .1s;
+    }
+
+        .about a:hover {
+            text-decoration: none;
+            background: #fafafa;
+            background: rgba(255,255,255,.7);
+        }
+
+.about-links {
+    height: 30px;
+}
+
+    .about-links > a {
+        float: left;
+        width: 50%;
+        line-height: 30px;
+        font-size: 12px;
+    }
+
+.about-author {
+    margin-top: 5px;
+}
+
+    .about-author > a {
+        padding: 1px 3px;
+        margin: 0 -1px;
+    }
+
+body {
+    font: 13px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #404040;
+    background: #e0dfdf;
+}
+
+.topRepository {
+    background: #005b8a;
+    padding: 15px;
+    margin-left: -17px;
+    margin-right: -15px;
+}
+
+.repositoryHead {
+    background: #fff;
+}
+
+.lft {
+    margin-left: 20px;
+    margin-top: 7px;
+}
+
+.rght {
+    margin-right: 20px;
+    margin-top: 17px;
+}
+
+.repository {
+    padding: 15px !important;
+    padding-left: 16px !important;
+    padding-top: 0 !important;
+}
+
+.sign-up {
+    position: relative;
+    margin: 50px auto;
+    max-width: 670px;
+    padding: 10px 25px 29px;
+    background: #fff;
+    border-bottom: 1px solid #c4c4c4;
+    -webkit-box-shadow: 0 1px 5px rgba(0,0,0,.25);
+    box-shadow: 0 1px 5px rgba(0,0,0,.25);
+}
+
+    .sign-up:before, .sign-up:after {
+        content: '';
+        position: absolute;
+        bottom: 1px;
+        left: 0;
+        right: 0;
+        height: 10px;
+        background: inherit;
+        border-bottom: 1px solid #d2d2d2;
+        border-radius: 4px;
+    }
+
+    .sign-up:after {
+        bottom: 3px;
+        border-color: #dcdcdc;
+    }
+
+.sign-up-title {
+    margin: -25px -25px 25px;
+    padding: 15px 25px;
+    line-height: 35px;
+    font-size: 26px;
+    font-weight: 300;
+    color: #aaa;
+    text-align: center;
+    text-shadow: 0 1px rgba(255,255,255,.75);
+    background: #f7f7f7;
+}
+
+    .sign-up-title:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 8px;
+        background: #c4e17f;
+        border-radius: 5px 5px 0 0;
+        background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+    }
+
+input {
+    font-family: inherit;
+    color: inherit;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.sign-up-input {
+    width: 100%;
+    height: 50px;
+    margin-bottom: 10px;
+    padding: 0 35px 2px;
+    font-size: 17px;
+    background: #fff;
+    border: 2px solid #ebebeb;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 -2px #ebebeb;
+    box-shadow: inset 0 -2px #ebebeb;
+}
+
+    .sign-up-input:focus {
+        border-color: #62c2e4;
+        outline: none;
+        -webkit-box-shadow: inset 0 -2px #62c2e4;
+        box-shadow: inset 0 -2px #62c2e4;
+    }
+
+.lt-ie9 .sign-up-input {
+    line-height: 48px;
+}
+.left-inner-addon {
+    margin-left: 20px; 
+}
+.sign-up-button {
+    position: relative;
+    vertical-align: top;
+    width: 85%;
+    height: 47px;
+    padding: 0;
+    font-size: 22px;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0,0,0,.25);
+    background: #27468E;
+    border: 0;
+    border: 1px solid #89969d;
+    cursor: pointer;
+    margin-top: 7px;
+    margin: 35px auto 0;
+    display: block;
+    max-width: 324px;
+}
+
+    .sign-up-button:active {
+        top: 1px;
+        outline: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+:-moz-placeholder {
+    color: #ccc;
+    font-weight: 300;
+}
+
+::-moz-placeholder {
+    color: #ccc;
+    opacity: 1;
+    font-weight: 300;
+}
+
+::-webkit-input-placeholder {
+    color: #ccc;
+    font-weight: 300;
+}
+
+:-ms-input-placeholder {
+    color: #ccc;
+    font-weight: 300;
+}
+
+::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+.sign-in input[type="radio"], input[type="checkbox"] {
+    margin-top: -.1em;
+}
+
+.sign-in input[type=checkbox] {
+    border: 1px solid silver;
+    margin: 0 .1em 0 0;
+    padding: 0;
+    font-size: 16px;
+    line-height: 1em;
+    width: 1.25em;
+    height: 1.25em;
+    -webkit-appearance: none;
+    -webkit-box-shadow: 1px 1px 1px #fff;
+    -webkit-border-radius: .25em;
+    vertical-align: text-top;
+    display: inline-block;
+    margin-right: 10px;
+    margin-left: 23px;
+}
+
+    .sign-in input[type=checkbox]:checked::after {
+        content: "✔";
+        display: block;
+        text-align: center;
+        font-size: 16px;
+        height: 16px;
+        line-height: 18px;
+    }
+
+.repositoryList ul img {
+    float: left;
+    width: 46px;
+}
+
+#btnResLogout .glyphicon-log-out {
+    padding: 0 10px !important;
+}
+
+#sign-up i.password {
+    background: url('../images/password.png');
+    background-repeat: no-repeat;
+}
+
+.left-inner-addon i {
+    position: absolute;
+    padding: 10px 12px;
+    pointer-events: none;
+    color: #999999 !important;
+    margin-top: 13px;
+    margin-left: 20px;
+}
+
+#sign-up i.user {
+    background: url('../images/username.png');
+    background-repeat: no-repeat;
+}
+
+.left-inner-addon i {
+    position: absolute;
+    padding: 10px 12px;
+    pointer-events: none;
+    color: #999999 !important;
+    margin-top: 13px;
+    margin-left: 10px;
+}
+
+.login-body {
+    height: auto;
+}
+
+#pg_pagerdivCorrespondenceGrid {
+    font-size: 12px !important;
+}

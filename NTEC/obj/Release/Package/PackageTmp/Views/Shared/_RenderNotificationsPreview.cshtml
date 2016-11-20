@@ -1,0 +1,30 @@
+﻿@model NTEC.Models.GenerateReference.UnassignModel
+<p>
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <h4>@Model.GeneratedCodeEn</h4>
+        </div>
+    </div>
+</p>
+
+
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h4>@(global::Resources.Resource.UnssignReason)</h4>
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+
+            <input type="hidden" name="Id" value="@Model.Id" id="UpdateFormId" />
+            <div class="form-group">
+                <label class="control-label col-md-2" style="padding-right: 0px;">@(global::Resources.Resource.WriteYourReason)</label>
+                <div class="col-md-10">
+                    <textarea class="form-control" data-val="true" data-val-required="your reason is required." id="UnassignReason" name="UnassignReason" required rows="3"></textarea>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+

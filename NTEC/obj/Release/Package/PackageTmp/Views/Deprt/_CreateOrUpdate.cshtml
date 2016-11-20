@@ -1,0 +1,55 @@
+﻿@model NTEC.Models.DepartmentsModel
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN SAMPLE FORM PORTLET-->
+
+
+        <div class="portlet-body">
+
+
+            <div class="row">
+                @Html.HiddenFor(x => x.DepartmentId)
+                <div class="form-group">
+                    <label class="control-label col-md-4">@(global::Resources.Resource.NameEn)</label>
+                    <div class="col-md-6">
+
+                        @Html.TextBoxFor(x => x.NameEn, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.NameEn, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4">@(global::Resources.Resource.ShortNameEn)</label>
+                    <div class="col-md-6">
+                        @* <input class="form-control" data-val="true" data-val-required="The Shortcut Name English field is required." id="ShortcutEn" name="ShortcutEn" type="text">*@
+                        @Html.TextBoxFor(x => x.ShortcutEn, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ShortcutEn, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-4">@(global::Resources.Resource.NameAr)</label>
+                    <div class="col-md-6">
+                        @*<input class="form-control" data-val="true" data-val-required="The Name Arabic field is required." id="NameArabic" name="NameArabic" type="text" value="">*@
+                        @Html.TextBoxFor(x => x.NameAr, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.NameAr, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-4">@(global::Resources.Resource.ShortNAmeAr)</label>
+                    <div class="col-md-6">
+                        @*<input class="form-control" data-val="true" data-val-required="The Shortcut Name Arabic is required." id="ShortcutNameArabic" name="ShortcutNameArabic" type="text" value="">*@
+                        @Html.TextBoxFor(x => x.ShortcutAr, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ShortcutAr, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

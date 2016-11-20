@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NTEC", "NTEC\NTEC.csproj", "{CC09B033-1403-4757-920C-BC413569D329}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://ilead-server:8080/tfs/ams
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = MVCStructSample\\NTEC.csproj
+		SccProjectName1 = MVCStructSample
+		SccLocalPath1 = MVCStructSample
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC09B033-1403-4757-920C-BC413569D329}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC09B033-1403-4757-920C-BC413569D329}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC09B033-1403-4757-920C-BC413569D329}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC09B033-1403-4757-920C-BC413569D329}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

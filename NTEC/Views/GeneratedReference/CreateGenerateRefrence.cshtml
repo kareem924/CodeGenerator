@@ -1,0 +1,342 @@
+﻿@using NTEC.Models
+@model NTEC.Models.GenerateReference.GenerateRefrenceModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_ProjectLayout.cshtml";
+}
+
+
+
+
+<div class="row" id="replacetarget">
+
+    <div class="col-md-12">
+
+        <!-- BEGIN SAMPLE FORM PORTLET-->
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-green-haze">
+                    <i class="icon-settings font-green-haze"></i>
+                    <span class="caption-subject bold uppercase">@(global::Resources.Resource.CreateNewReference)</span>
+                </div>
+
+            </div>
+            <div class="portlet-body form">
+
+                @using (Html.BeginForm("CreateGenerateRefrence", "GeneratedReference", FormMethod.Post, new { @class = "form-horizontal", id = "GenerateForm" }))
+                {
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4">@(global::Resources.Resource.Department)</label>
+                                    <div class="col-md-8">
+                                        @if (SessionManager.LanguageId == "1")
+                                        {
+                                            <div class="k-rtl">
+                                                @(Html.Kendo().ComboBoxFor(m => m.DepartmentId)
+                                              .Placeholder("Please select")
+                                              .Name("DepartmentId")
+                                              .DataTextField("NameAr")
+                                              .DataValueField("DepartmentId")
+                                              .HtmlAttributes(new { @class = "form-control", style = "width:100%;" })
+                                              .Filter("contains")
+                                              .AutoBind(true)
+                                              .SelectedIndex(0)
+                                              .DataSource(source =>
+                                              {
+                                                  source.Read(read =>
+                                                  {
+                                                      read.Action("GetDepartmentsForGenerating", "GeneratedReference");
+                                                  })
+                                                      .ServerFiltering(true);
+                                              })
+                                                )
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            @(Html.Kendo().ComboBoxFor(m => m.DepartmentId)
+                                              .Placeholder("Please select")
+                                              .Name("DepartmentId")
+                                              .DataTextField("NameEn")
+                                              .DataValueField("DepartmentId")
+                                              .HtmlAttributes(new { @class = "form-control", style = "width:100%;" })
+                                              .Filter("contains")
+                                              .AutoBind(true)
+                                              .SelectedIndex(0)
+                                              .DataSource(source =>
+                                              {
+                                                  source.Read(read =>
+                                                  {
+                                                      read.Action("GetDepartmentsForGenerating", "GeneratedReference");
+                                                  })
+                                                      .ServerFiltering(true);
+                                              })
+                                            )
+                                        }
+                                        <span id="DepartError" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4">@(global::Resources.Resource.Company)</label>
+                                    <div class="col-md-8">
+
+                                        @Html.TextBoxFor(x => x.CompanyName, new { @class = "form-control" })
+                                        <span id="companyError" class="text-danger"></span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4">@(global::Resources.Resource.Type)</label>
+                                    <div class="col-md-8">
+                                        <div class="md-radio-inline">
+                                            <div class="md-radio has-warning">
+                                                <input checked="checked"
+                                                       id="Incoming"
+                                                       name="Incoming"
+                                                       type="radio"
+                                                       value="Incoming" />
+                                                <label for="Incoming">
+                                                    <span class="inc"></span>
+                                                    <span class="check"></span>
+                                                    <span class="box"></span>
+                                                    @(global::Resources.Resource.Incoming)
+                                                </label>
+                                            </div>
+                                            <div class="md-radio has-success">
+                                                <input id="Outgoing"
+                                                       name="Incoming"
+                                                       type="radio"
+                                                       value="Outgoing" />
+
+                                                <label for="Outgoing">
+                                                    <span></span>
+                                                    <span class="check"></span>
+                                                    <span class="box"></span>
+                                                    @(global::Resources.Resource.Outgoing)
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 ">
+                                <button type="button" id="save" name="save" value="Submit" class="btn blue genBtn" style="   margin-bottom: 20px; width: 35%;">
+                                    <i class="fa fa-cog"></i>  @(global::Resources.Resource.Generate)
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4">@(global::Resources.Resource.EnflishCode)</label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <div class="input-icon">
+
+                                                @Html.TextBoxFor(x => x.GeneratedCodeEn, new { @class = "form-control", @readonly = "readonly", id = "EngCode" })
+                                            </div>
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-success" type="button" id="btnEngCode"><i class="icon-copy"></i> @(global::Resources.Resource.Copy)</button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4">@(global::Resources.Resource.ArabicCode)</label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <div class="input-icon">
+
+                                                @Html.TextBoxFor(x => x.GeneratedCodeAr, new { @class = "form-control", @readonly = "readonly", id = "ArbCode" })
+
+                                            </div>
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-success" type="button" id="btnArbCode"><i class="icon-copy"></i> @(global::Resources.Resource.Copy)</button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+
+            </div>
+        </div>
+    </div>
+</div>
+@*<div id='myModal' class='modal fade in'>
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div id='myModalContent'></div>
+            </div>
+        </div>
+    </div>*@
+<div class="row">
+    <div class="col-md-12">
+        @{ Html.RenderAction("IncomingIndex", "GeneratedReference"); }
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        @{ Html.RenderAction("OutgoingIndex", "GeneratedReference"); }
+    </div>
+</div>
+
+
+
+
+
+
+@{ Html.RenderPartial("_RenderUpdateModalPreview"); }
+
+
+<script src="~/Scripts/clipboard/clipboard.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".alert-dismissible").delay(5000)
+            .fadeOut(100);
+    });
+    var unassignUrl = '@Url.Action("Unassign")';
+
+    var confirmUrl = '@Url.Action("GetGenerated")';
+    var previewUpdateContainer = $('#updateConfirmModal #updatePreview');
+    var currentNotificationId;
+    function updateNotification(id, action) {
+        $("#notificationFormItemId").val(id);
+        switch (action) {
+            case 'update':
+                $("#notificationForm").attr('action', unassignUrl).submit();
+                break;
+            default:
+                console.debug('Unknown action ' + action);
+        }
+    }
+    function confirmUpdate(id) {
+        currentNotificationId = id;
+        previewUpdateContainer.html('<p>Loading content...</p>');
+        previewUpdateContainer.load(confirmUrl, { id: currentNotificationId });
+        $('#updateConfirmModal').modal('show');
+    }
+    $(function () {
+        $("#updateConfirmModal").on('click', "#updateConfirm", function () {
+            updateNotification(currentNotificationId, 'update');
+        });
+    });
+    $('#save').click(function () {
+        var companyError = '@(global::Resources.Resource.companyError)';
+        var deprtError = '@(global::Resources.Resource.DepartmentRequired)';
+        if ($("#DepartmentId").val() === '' && $("#CompanyName").val() === '') {
+            $("#CompanyName").addClass('errorClass');
+            $("#CompanyName").focus();
+            $("#companyError").html(" ");
+            $("#companyError").html(companyError);
+            $("#DepartmentId").addClass('errorClass');
+            $("#DepartError").html(" ");
+            $("#DepartError").html(deprtError);
+            return;
+
+        } else {
+            $("#CompanyName").removeClass('errorClass');
+            $("#companyError").text("");
+            $("#DepartError").removeClass('errorClass');
+            $("#DepartError").text("");
+        }
+        if ($("#DepartmentId").val() === '') {
+            $("#DepartmentId").addClass('errorClass');
+            $("#DepartError").html(" ");
+            $("#DepartError").html(deprtError);
+            return;
+        } else {
+            $("#DepartError").removeClass('errorClass');
+            $("#DepartError").text("");
+        }
+        if ($("#CompanyName").val() === '') {
+            $("#CompanyName").addClass('errorClass');
+            $("#CompanyName").focus();
+            $("#companyError").html(" ");
+            $("#companyError").html(companyError);
+            return;
+
+        } else {
+            $("#CompanyName").removeClass('errorClass');
+            $("#companyError").text("");
+        }
+        var generate = '@(global::Resources.Resource.Generate)';
+        var generating = '@(global::Resources.Resource.Generating)';
+        var notification = $("#notification").data("kendoNotification");
+        var successMsg = '@(global::Resources.Resource.SuccessGenerate)';
+        $(this).attr("disabled", true);
+        $("#save").html('<i class="fa fa-cog fa-spin fa-3x fa-fw"></i> <span class="sr-only">Loading...</span> ' + generating);
+
+        var link = '@Url.Action("CreateGenerateRefrence","GeneratedReference")';
+        $.ajax({
+            url: link,
+            type: "post",
+            data: $('#GenerateForm').serialize(),
+            success: function (result) {
+                if (result.success) {
+                    $('#IncomingDataGrid').load('@Url.Action("IncomingIndex","GeneratedReference")');
+                    $('#OutgoingDataGrid').load('@Url.Action("OutgoingIndex","GeneratedReference")');
+                    $('#EngCode').val(result.GeneratedCodeEn);
+                    $('#ArbCode').val(result.GeneratedCodeAr);
+                    $("#save").html(' <i class="fa fa-cog"></i> ' + generate);
+                    $("#CompanyName").val("");
+                    $("#CompanyName").removeClass('errorClass');
+                    $('#save').attr("disabled", false);
+                    notification.show({
+                        message: successMsg
+                    }, "upload-success");
+
+
+                } else {
+                    $("#save").html(' <i class="fa fa-cog"></i> ' + generate);
+                    $('#save').attr("disabled", false);
+                    alert("Please check your inputs");
+
+                }
+            }
+        });
+
+    });
+    var clipboard = new Clipboard('#btnEngCode', {
+        target: function () {
+            return document.querySelector('#EngCode');
+        }
+    });
+    var clipboard = new Clipboard('#btnArbCode', {
+        target: function () {
+            return document.querySelector('#ArbCode');
+        }
+    });
+    var clipboard = new Clipboard('#btnEngCodeEdit', {
+        target: function () {
+            return document.querySelector('#EngCodeEdit');
+        }
+    });
+    var clipboard = new Clipboard('#EditbtnArbCode', {
+        target: function () {
+            return document.querySelector('#EditArbCode');
+        }
+    });
+
+
+
+</script>
+

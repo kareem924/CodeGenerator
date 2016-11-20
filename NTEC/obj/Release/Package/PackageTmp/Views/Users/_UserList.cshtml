@@ -1,0 +1,161 @@
+﻿@using System.Globalization
+@using PagedList
+@using PagedList.Mvc
+@{
+    Layout = null;
+}
+<div id="UsersDataGrid">
+    <div class="row">
+        <div class="col-md-12">
+
+            <!-- BEGIN SAMPLE TABLE PORTLET-->
+            <div class="portlet box green">
+
+                <div class="portlet-title">
+                    <div class="caption">
+                       @(global::Resources.Resource.Users)
+                    </div>
+
+                </div>
+                <div class="portlet-body flip-scroll">
+                    <div class="table-toolbar">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="btn-group">
+                                    @Html.ActionLink((global::Resources.Resource.AddNewUser), "CreateUser", "Users", new { @class = "btn green", data_modal = "" })
+                                </div>
+                            </div>
+                            @*<div class="col-md-6">
+                                    <div class="form-group form-md-line-input has-info form-md-floating-label">
+                                        <div class="input-group input-group-sm">
+                                            <div class="input-group-control">
+                                                <input type="text" class="form-control input-sm" placeholder="search">
+
+                                            </div>
+                                            <span class="input-group-btn btn-right">
+                                                <button class="btn btn-warning" type="submit">Search!</button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>*@
+                        </div>
+                    </div>
+
+                    <table class="table table-bordered table-striped table-condensed flip-content">
+                        <thead class="flip-content">
+                            <tr class='clickable-row'>
+                                <th class="text-center">
+                                   @(global::Resources.Resource.Email)
+                                </th>
+                                <th class="text-center">
+                                   @(global::Resources.Resource.FirstName)
+                                </th>
+                                <th class="text-center">
+                                   @(global::Resources.Resource.LastName)
+                                </th>
+                                <th class="text-center">
+                                  @(global::Resources.Resource.Role)
+                                </th>
+
+                                <th class="text-center">
+                                   @(global::Resources.Resource.Telephone)
+                                </th>
+                                <th class="text-center">
+                                   @(global::Resources.Resource.CreatedAt)
+                                </th>
+                                <th class="text-center">
+                                   @(global::Resources.Resource.Action)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var user in ViewBag.OnePageOfGeneratedReference)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.ActionLink((string)@user.Email, "UpdateUser", "Users", new { id = user.UserId }, new { data_modal = "" })
+                                    </td>
+                                    <td>@user.FirstName</td>
+                                    <td>@user.LastName</td>
+                                    <td>@user.Roles.RoleName</td>
+
+                                    <td class="text-center">@user.Telephone</td>
+                                    <td class="text-center">@user.CreatedAt.ToString("dd/MM/yyyy HH:mm", new CultureInfo("en-US"))</td>
+                                    <td class="text-center">
+
+                                        @Html.NoEncodeActionLink("<span class='fa fa-times'></span>", "Delete", "Delete", "Users", routeValues: new { id = user.UserId }, htmlAttributes: new { data_modal = "", @class = "btn btn-sm btn-danger" })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    @Html.PagedListPager((IPagedList)ViewBag.OnePageOfGeneratedReference, page => Url.Action("List", new { page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "UsersDataGrid" }))
+
+                </div>
+            </div>
+
+            <!-- END SAMPLE TABLE PORTLET-->
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $.ajaxSetup({ cache: false });
+
+        $("a[data-modal]").on("click", function (e) {
+            // hide dropdown if any (this is used wehen invoking modal from link in bootstrap dropdown )
+            //$(e.target).closest('.btn-group').children('.dropdown-toggle').dropdown('toggle');
+            if (this.href.indexOf('Delete') > -1) {
+                $('#DeleteModalContent').load(this.href, function () {
+                    $('#deleteModal').modal({
+                        backdrop: 'static',
+                        keyboard: true
+                    }, 'show');
+                    bindForm(this);
+
+                });
+                return false;
+            } else {
+                $('#myModalContent').load(this.href, function () {
+                    $('#myModal').modal({
+                        backdrop: 'static',
+                        keyboard: true
+                    }, 'show');
+                    bindForm(this);
+                });
+                return false;
+            }
+
+        });
+
+    });
+
+    function bindForm(dialog) {
+        $('form', dialog).submit(function () {
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: $(this).serialize(),
+                success: function (result) {
+                    if (result.success) {
+
+                        $('#myModal').modal('hide');
+                        $('#deleteModal').modal('hide');
+                        $('#UsersDataGrid').load(result.url); //  Load data from the server and place the returned HTML into the matched element
+
+                    } else {
+                        $('#myModalContent').html(result);
+                        bindForm(dialog);
+                    }
+                }
+            });
+            return false;
+        });
+    }
+
+
+</script>
+

@@ -1,0 +1,158 @@
+﻿@model NTEC.Models.GenerateReference.GenerateRefrenceModel
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" id="myModalLabel">Reassign this reference</h4>
+</div>
+
+
+@using (Html.BeginForm())
+{
+    <div class="modal-body">
+        <div class="portlet light">
+            <div class="portlet-body form">
+                <div class="form-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Department</label>
+                                <div class="col-md-8">
+                                    @Html.HiddenFor(model => model.GeneratedReferenceId)
+                                    @(Html.Kendo().ComboBoxFor(m => m.EditDepartmentId)
+                                          .Placeholder("Please select")
+                                          .Name("EditDepartmentId")
+                                          .DataTextField("NameEn")
+                                          .DataValueField("DepartmentId")
+                                          .HtmlAttributes(new {@class = "form-control", style = "width:100%; z-index:55555555"})
+                                          .Filter("contains")
+                                          .AutoBind(true)
+                                          .DataSource(source =>
+                                          {
+                                              source.Read(read =>
+                                              {
+                                                  read.Action("GetDepartments", "GeneratedReference");
+                                              })
+                                                  .ServerFiltering(true);
+                                          })
+                                          )
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Company</label>
+                                <div class="col-md-8">
+                                    <input class="form-control" data-val="true" readonly="readonly" data-val-required="The CompanyName field is required." id="CompanyName" name="CompanyName" type="text" value="NTEC">
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Type</label>
+                                <div class="col-md-8">
+                                    <div class="md-radio-inline">
+                                        <div class="md-radio has-warning">
+                                            <input checked="checked"
+                                                   id="IncomingEdit"
+                                                   name="IncomingEdit"
+                                                   type="radio"
+                                                   value="Incoming"
+                                                   disabled="disabled" />
+                                            <label for="IncomingEdit">
+                                                <span class="inc"></span>
+                                                <span class="check"></span>
+                                                <span class="box"></span>
+                                                Incoming
+                                            </label>
+                                        </div>
+                                        <div class="md-radio has-success">
+                                            <input id="OutgoingEdit"
+                                                   name="IncomingEdit"
+                                                   type="radio"
+                                                   disabled="disabled"
+                                                   value="Outgoing" />
+
+                                            <label for="OutgoingEdit">
+                                                <span></span>
+                                                <span class="check"></span>
+                                                <span class="box"></span>
+                                                Outgoing
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Company Arabic</label>
+                                <div class="col-md-8">
+
+                                    <input class="form-control" data-val="true" readonly="readonly" data-val-required="The CompanyNameAr field is required." id="CompanyNameAr" name="CompanyNameAr" type="text" value="ش و ت">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-6 col-md-offset-6">
+                            <button type="submit" id="EditGenerat" name="save" value="Submit" class="btn blue" style=" float: right;  margin-bottom: 20px;width: 35%;margin-right: 16px;">
+                                <i class="fa fa-cog"></i>  Generate
+                            </button>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-4">English code</label>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <div class="input-icon">
+                                            <i class="fa fa-cog"></i>
+
+                                            @Html.TextBoxFor(x => x.GeneratedCodeEn, new { @class = "form-control", @readonly = "readonly", id = "EngCodeEdit" })
+                                        </div>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-success" type="button" id="btnEngCodeEdit"><i class="icon-copy"></i> Copy</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Arabic code</label>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <div class="input-icon">
+                                            <i class="fa fa-cog"></i>
+                                            @Html.TextBoxFor(x => x.GeneratedCodeAr, new { @class = "form-control", @readonly = "readonly", id = "EditArbCode" })
+
+                                        </div>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-success" type="button" id="EditbtnArbCode"><i class="icon-copy"></i> Copy</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+}
+<div class="modal-footer">
+    <button class="btn btn-circle btn-default" type="button" data-dismiss="modal">Cancel</button>
+</div>

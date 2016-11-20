@@ -1,0 +1,129 @@
+﻿@using System.Web.UI.WebControls
+@model NTEC.Models.DepartmentsModel
+@{
+    ViewBag.Title = "UpdateDepartment";
+    Layout = "~/Views/Shared/_ProjectLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN SAMPLE FORM PORTLET-->
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-green-haze">
+                    <i class="icon-settings font-green-haze"></i>
+                    <span class="caption-subject bold uppercase">Update Department</span>
+                </div>
+
+            </div>
+            <div class="portlet-body form">
+                @using (Html.BeginForm("UpdateDepartment", "Departments2", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    <div class="form-body">
+                        <div class="col-md-8">
+                            <div class="form-group form-md-line-input">
+                                <label class="col-md-2 control-label" for="form_control_1">ID</label>
+                                <div class="col-md-8">
+
+                                    @Html.TextBoxFor(x => x.DepartmentId, new {@class = "form-control"})
+                                    <div class="form-control-focus">
+                                    </div>
+                                    <span class="help-block">@@Example Information Technology..</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-md-line-input">
+                                <label class="col-md-2 control-label" for="form_control_1">Name English</label>
+                                <div class="col-md-8">
+
+                                    @Html.TextBoxFor(x => x.NameEn, new {@class = "form-control", placeholder = "Enter The name English"})
+                                    <div class="form-control-focus">
+                                    </div>
+                                    <span class="help-block">@@Example Information Technology..</span>
+                                </div>
+                            </div>
+                            <div class="form-group form-md-line-input">
+                                <label class="col-md-2 control-label" for="form_control_1">Shortcut Name English</label>
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(x => x.ShortcutEn, new {@class = "form-control", placeholder = "Enter The Shortcut English"})
+                                    <div class="form-control-focus">
+                                    </div>
+                                    <span class="help-block">@@Example IT...</span>
+                                </div>
+                            </div>
+                            <div class="form-group form-md-line-input">
+                                <label class="col-md-2 control-label" for="form_control_1">Name Arabic</label>
+                                <div class="col-md-8">
+
+                                    @Html.TextBoxFor(x => x.NameAr, new {@class = "form-control", placeholder = "Entere The name Arabic"})
+                                    <div class="form-control-focus">
+                                    </div>
+                                    <span class="help-block">@@example: تكنولوجيا المعلومات</span>
+                                </div>
+                            </div>
+                            <div class="form-group form-md-line-input">
+                                <label class="col-md-2 control-label" for="form_control_1">Shortcut Name Arabic</label>
+                                <div class="col-md-8">
+                                    @Html.PasswordFor(x => x.ShortcutAr, new {@class = "form-control", placeholder = "Enter The Shortcut Arabic"})
+                                    <div class="form-control-focus">
+                                    </div>
+                                    <span class="help-block">@@example: ت . م</span>
+                                </div>
+                            </div>
+
+                            @*<div class="form-group form-md-line-input">
+                                    <label class="col-md-2 control-label" for="form_control_1">Birth Date</label>
+                                    <div class="col-md-10">
+
+                                        @Html.Kendo().DatePickerFor(x => x.DOB)
+                                        <div class="form-control-focus">
+                                        </div>
+                                        <span class="help-block">Some help goes here...</span>
+                                    </div>
+                                </div>*@
+
+                        </div>
+                        @*<div class="col-md-4">
+                                <div style="margin-top: 25px">
+                                    <div class="caption font-green-haze" style="margin-bottom: 10px">
+                                        <i class="fa fa-list"></i>
+                                        <span class="caption-subject bold uppercase">Select Departments</span>
+                                    </div>
+                                    @(Html.Kendo().MultiSelect()
+                                          .Name("departments")
+                                          .DataTextField("NameEn")
+                                          .DataValueField("DepartmentId")
+                                          .Placeholder("Select Departments...")
+                                          .AutoBind(false)
+                                          .DataSource(source =>
+                                          {
+                                              source.Read(read =>
+                                              {
+                                                  read.Action("GetDepartments", "GeneratedReference");
+                                              })
+                                                  .ServerFiltering(true);
+                                          })
+                                    )
+                                </div>
+                            </div>*@
+
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-2 col-md-10">
+                                <button type="button" class="btn default">Cancel</button>
+                                <button type="submit" class="btn blue">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <!-- END SAMPLE FORM PORTLET-->
+
+    </div>
+
+</div>
+
+
+

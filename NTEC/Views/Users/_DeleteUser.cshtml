@@ -1,0 +1,18 @@
+﻿
+@model NTEC.Models.UsersModel
+@{
+    ViewBag.Title = "DeleteUser";
+    Layout = null;
+}
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" id="myModalLabel">@(global::Resources.Resource.ConfirmDeleteUsr)</h4>
+</div>
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(x => x.UserId)
+    <div class="modal-footer">
+        <button class="btn" type="button" data-dismiss="modal">@(global::Resources.Resource.No)</button>
+        <input class="btn btn-danger" type="submit" value="@(global::Resources.Resource.Yes)" />
+    </div>
+}

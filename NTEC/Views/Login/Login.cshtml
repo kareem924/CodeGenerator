@@ -1,0 +1,139 @@
+﻿@{
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@section Header
+{
+    @Scripts.Render("~/bundles/login")
+
+
+}
+
+@if (User.Identity.IsAuthenticated == true)
+{
+    Response.Redirect("~/GeneratedReference/CreateGenerateRefrence");
+}
+
+<script type="text/javascript">
+    $(function () {
+
+        SampleNS.UI.Login.readyMain();
+        SampleNS.UI.Login.LangId('@NTEC.Classes.Security.SessionManager.LanguageId');
+
+    });
+
+</script>
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body class="login-body">
+
+
+
+    <div class="sign-up sign-in" id="sign-up">
+        <div class="top_header_login">
+            <ul class="top-links-login">
+                <li class="dropdown language-login">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+
+                        <div class="language_caret" id="btnLang">English <i class="fa fa-sort-desc"></i></div>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-mini" role="menu">
+                        <li> <a href="#" id="btnArabic">العربية</a> </li>
+                        <li> <a href="#" id="btnEnglish">English</a> </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+        <div class="clearfix"></div>
+        <div class="logoSettings">
+            <img src="~/Content/images/logo_ntec@2x.png" class="img-responsive" alt="" />
+        </div>
+
+
+        <h1>@(global::Resources.Resource.SignIn)</h1>
+
+        <p>&nbsp;&nbsp;&nbsp;</p>
+        <div class="left-inner-addon">
+            <i class="user"></i>
+            <input id="txtUser" type="text" class="sign-up-input" placeholder="@(global::Resources.Resource.Username)" autofocus>
+        </div>
+        <div class="left-inner-addon">
+            <i class="password"></i>
+            <input id="txtPass" type="password" class="sign-up-input" placeholder="@(global::Resources.Resource.Password)">
+        </div>
+        <input type="checkbox" id="chkkeepmeloggedin">@(global::Resources.Resource.RememberMe)
+        <input id="btnLogin" type="button" value="@(global::Resources.Resource.Login)" class="sign-up-button">
+ 
+
+    </div>
+
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+    $(function () {
+
+        if ('@NTEC.Classes.Security.SessionManager.LanguageId' === '2') {
+
+            $('#btnLang').html('English <i class="fa fa-sort-desc"></i>');
+
+        }
+        else if ('@NTEC.Classes.Security.SessionManager.LanguageId' === '1') {
+            $('#btnLang').html('العربية ' + ' ' + '<i class="fa fa-sort-desc"></i>');
+        }
+
+    });
+
+</script>
+
+
+<script type="text/javascript">
+    //anonymous function to check all elements with class .fixMinMaxwidth
+    var fixMinMaxwidth = function () {
+        //only apply this fix to browsers without native support
+        if (typeof document.body.style.maxHeight !== "undefined" &&
+                typeof document.body.style.minHeight !== "undefined") return false;
+
+        //loop through all elements
+        $('.fixMinMaxwidth').each(function () {
+            //get max and minwidth via jquery
+            var maxWidth = parseInt($(this).css("max-width"));
+            var minWidth = parseInt($(this).css("min-width"));
+
+            //if min-/maxwidth is set, apply the script
+            if (maxWidth > 1024 && $(this).width() > maxWidth) {
+                $(this).width(maxWidth);
+            } else if (minWidth > 1024 && $(this).width() < minWidth) {
+                $(this).width(minWidth);
+            }
+        });
+    }
+
+    //initialize on domready
+    $(document).ready(function () {
+        fixMinMaxwidth();
+    });
+
+    //check after every resize
+    $(window).bind("resize", function () {
+        fixMinMaxwidth();
+    });
+
+
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.dropdown-toggle').dropdown();
+    });
+</script>

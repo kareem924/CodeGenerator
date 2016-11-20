@@ -1,0 +1,94 @@
+﻿@using PagedList
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_ProjectLayout.cshtml";
+}
+<div class="row">
+    <div class="col-md-12">
+
+        <!-- BEGIN SAMPLE TABLE PORTLET-->
+        <div class="portlet box green">
+
+            <div class="portlet-title">
+                <div class="caption">
+                    Incoming Genereated Reference
+                </div>
+
+            </div>
+            <div class="portlet-body flip-scroll">
+                <div class="table-toolbar">
+                    <div class="row">
+                        <div class="col-md-offset-6">
+
+                        </div>
+                        <div class="col-md-6">
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table table-bordered table-striped table-condensed flip-content">
+                    <thead class="flip-content">
+                        <tr>
+                            <th class="text-center">
+                                English Code
+                            </th>
+                            <th class="text-center">
+                                Arabic Code
+                            </th>
+                            <th class="text-center">
+                                Department Name
+                            </th>
+                            <th class="text-center">
+                                Company Name
+                            </th>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <th class="text-center">
+                                    Action
+                                </th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var generatedReference in ViewBag.OnePageOfGeneratedReference)
+                        {
+                            <tr>
+                                <td class="text-center">@generatedReference.GeneratedCodeEn</td>
+                                <td class="text-center">@generatedReference.GeneratedCodeAr</td>
+                                <td class="text-center">@generatedReference.Department.NameEn</td>
+                                <td class="text-center">@generatedReference.CompanyName</td>
+                                @if (User.IsInRole("Admin"))
+                                {
+
+
+                                    <td class="text-center">
+                                        @if (generatedReference.IsAssigned == true)
+                                        {
+                                            <a href="javascript:confirmUpdate(@generatedReference.GeneratedReferenceId)" class="btn btn-xs red-intense">
+                                                Unassign
+                                            </a>
+                                        }
+                                        else if (generatedReference.IsDeleted == true)
+                                        {
+                                            <label class="label label-danger">Deleted</label>
+                                        }
+                                        else
+                                        {
+                                            <a href="#" class="btn btn-xs btn-info">
+                                                Reassign
+                                            </a>
+                                        }
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                @Html.PagedListPager((IPagedList)ViewBag.OnePageOfGeneratedReference, page => Url.Action("Index", new { page }))
+            </div>
+
+        </div>
+    </div>
+</div>

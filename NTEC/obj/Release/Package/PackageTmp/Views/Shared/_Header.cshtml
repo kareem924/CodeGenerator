@@ -1,0 +1,119 @@
+﻿
+@using Resources
+@{
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+@section Header
+{
+
+    @RenderSection("Header", false)
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto:700' rel='stylesheet' type='text/css'>
+    <script src="~/Scripts/app/home/app.ui.commonInfo.js"></script>
+   
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    @*<meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <meta name="viewport" content="height=device-height">*@
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <script type="text/javascript">
+        window.ApplicationBasePath = '@Url.Content("~")';
+
+        $(function () {
+            //alert("calling readymain");
+          
+            SampleNS.UI.CommonInfo.readyMain();
+
+
+        });
+    </script>
+
+
+</head>
+
+
+<body>
+    <header>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="logo"  > <a id="btnLogo" href="#"> <img src="~/Content/images/logo.png" class="img-responsive" alt="" /> </a> </div>
+                </div>
+                <div class="col-sm-7">
+
+
+                    <ul class="app-links">
+
+                        <li class="dropdown">
+                            <a id="btnUserDetail" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                <div id="divWelcome">
+                                    <span class="caret caret-margin"></span>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu admin_links" role="menu">
+                                <li style="width: 158px;"><a id="btnLogout" href="#">@(global::Resources.Resource.Signout)</a></li>
+
+                            </ul>
+                        </li>
+                        <li class="dropdown language">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+
+                                <div id="divLang">
+                                    English
+                                    <span class="caret caret-margin"></span>
+                                </div>
+
+                            </a>
+                            <ul class="dropdown-menu admin_links" role="menu">
+                                <li> <a href="#" id="btnArabic">العربية</a> </li>
+                                <li> <a href="#" id="btnEnglish">English</a> </li>
+
+                            </ul>
+                        </li>
+
+
+                    </ul>
+
+
+
+
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container-fluid heighteight">
+        <div class="row fullheight">
+           
+
+
+            <div class="col-md-12 col-sm-12 fullheight padding-right" id="bodyContainer">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <footer class="main-footer">
+        @*All rights reserved to iLead © 2015*@
+        @(global::Resources.Resource.FooterHeading)
+
+
+    </footer>
+</body>
+</html>
+
+
+
+
+
+
+
